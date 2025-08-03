@@ -10,7 +10,7 @@ pipeline {
         
         // 새로 추가된 변수
         EC2_USER             = 'ubuntu' // 배포할 EC2의 사용자 이름
-        EC2_HOST             = 'http://13.236.135.11:8080'
+        EC2_HOST             = '13.236.135.11'
         SSH_CREDENTIAL_ID    = 'jenkins-ssh-key-1' // 2단계에서 만든 Credential ID
     }
 
