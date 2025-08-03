@@ -42,7 +42,7 @@ pipeline {
                     // ssh-agent를 사용하여 키를 등록하고 원격으로 명령을 실행합니다.
                     // StrictHostKeyChecking=no 옵션은 처음 접속할 때 "Are you sure you want to continue connecting (yes/no)?" 질문을 자동으로 무시해줍니다.
                     sh """
-                        ssh -o StrictHostKeyChecking=no -i \${SSH_KEY_FILE} ${EC2_USER}@${EC2_HOST} '
+                        ssh -o StrictHostKeyChecking=no -i \$SSH_KEY_FILE ${EC2_USER}@${EC2_HOST} '
                         
                         # --- 아래는 EC2 서버 안에서 실행될 명령어들입니다 ---
 
