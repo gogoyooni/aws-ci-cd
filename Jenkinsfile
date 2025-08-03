@@ -47,17 +47,17 @@ pipeline {
                         # --- 아래는 EC2 서버 안에서 실행될 명령어들입니다 ---
 
                         echo "--> Logging in to ECR..."
-                        aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin $(aws sts get-caller-identity --query Account --output text).dkr.ecr.${AWS_REGION}.amazonaws.com
+                        aws ecr get-login-password --region \${AWS_REGION} | docker login --username AWS --password-stdin $(aws sts get-caller-identity --query Account --output text).dkr.ecr.${AWS_REGION}.amazonaws.com
 
                         echo "--> Stopping and removing old container..."
                         docker stop test-app || true
                         docker rm test-app || true
 
                         echo "--> Pulling latest image from ECR..."
-                        docker pull $(aws sts get-caller-identity --query Account --output text).dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
+                        docker pull \$(aws sts get-caller-identity --query Account --output text).dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
 
                         echo "--> Starting new container..."
-                        docker run -d --name test-app -p 80:8080 $(aws sts get-caller-identity --query Account --output text).dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
+                        docker run -d --name test-app -p 80:8080 \$(aws sts get-caller-identity --query Account --output text).dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
                         
                         echo "--> Deployment Complete!"
                         '
